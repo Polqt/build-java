@@ -1,0 +1,9 @@
+# Compiled output
+*.class
+out/
+
+# IntelliJ IDEA module files
+*.iml
+
+# Claude Code local config
+.claude/
