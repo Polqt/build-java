@@ -2,13 +2,14 @@
 # Usage: .\run_tests.ps1
 # Requires: javac and java on PATH, sources compiled to out/
 
-$SRC = "src"
-$OUT = "out"
-$TESTS = "tests"
+$SRC = "$PSScriptRoot\src"
+$OUT = "$PSScriptRoot\out"
+$TESTS = "$PSScriptRoot\tests"
 $PASS = 0
 $FAIL = 0
 
 Write-Host "Compiling..."
+New-Item -ItemType Directory -Force $OUT | Out-Null
 $sources = Get-ChildItem -Recurse -Filter "*.java" $SRC | ForEach-Object { $_.FullName }
 javac -d $OUT $sources
 if ($LASTEXITCODE -ne 0) {
@@ -30,7 +31,7 @@ function Run-Test($file, $expectedExit) {
 }
 
 foreach ($step in 1..4) {
-    Write-Host "`nStep $step:"
+    Write-Host "`nStep ${step}:"
     $stepDir = "$TESTS/step$step"
     if (Test-Path "$stepDir/valid.json") {
         $r = Run-Test "$stepDir/valid.json" 0

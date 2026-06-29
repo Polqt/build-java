@@ -1,7 +1,7 @@
 package lexer;
 
 public record Token(
-        TokenType type,   // fixed: was "tpye"
+        TokenType type,
         String lexeme,
         int position
 ) {}
